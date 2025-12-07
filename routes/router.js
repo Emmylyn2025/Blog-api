@@ -1,6 +1,6 @@
 const express = require('express');
 const {registerUser, loginUser, refreshAccessToken, logOut, decodeToken} = require('../controllers/userControllers');
-const {createBlog, getBlogs, oneBlog, updateBlog, deleteBlog, addComment, deleteComment, viewAllComment} = require('../controllers/blogControllers');
+const {createBlog, getBlogs, oneBlog, updateBlog, deleteBlog, addComment, deleteComment, viewAllComment, createLikes, unLike, tagUser} = require('../controllers/blogControllers');
 const {protect} = require('../middleware/authMiddleware');
 const router = express.Router();
 
@@ -21,6 +21,9 @@ router.delete('/delete/:id', protect , deleteBlog);
 router.post('/comment/:id', protect, addComment);
 router.delete('/deletecomment/:blogId/:commentId', protect, deleteComment);
 router.get('/allcomments/:blogId', protect, viewAllComment);
+router.get('/addlikes/:blogId', protect, createLikes);
+router.get('/unlike/:blogId/:likeId', protect, unLike);
+router.get('/tag/:blogId/:userId', protect, tagUser)
 
 
 module.exports = router;
